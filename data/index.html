@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Bootstrap 4 CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open Sans"/>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+  <!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
+  <style>
+body {font-family: Arial, Helvetica, sans-serif;
+  background-image: url('images/background.jpg');
+background-color: rgb(165, 186, 214);
+}
+#title {
+text-decoration: underline;
+}
+
+#quiz {
+text-indent: 10px;
+display:none;
+}
+
+.button {
+border:4px solid;
+border-radius:10px;
+width: 60px;
+padding-left:4px;
+padding-right: 4px;
+position: relative;
+float:right;
+background-color: #DCDCDC;
+color: black;
+margin: 0 4px 0 4px;
+}
+
+.button1 {
+  background: transparent;
+  border: none;
+  color: transparent;
+
+}
+
+.button.active {
+background-color: #F8F8FF;
+color: #525252;
+}
+
+.button a {
+text-decoration: none;
+color: black;
+}
+
+#qcontainer {
+width:50%;
+margin:auto;
+padding: 0 25px 40px 10px;
+background-color: #1E90FF;
+border:4px solid #B0E0E6;
+border-radius:5px;
+color: #FFFFFF;
+font-weight: bold;
+box-shadow: 5px 5px 5px #888;
+}
+
+#prev {
+display:none;
+}
+
+#start {
+display:none;
+width: 90px;
+}
+
+.qmodal {
+display: none; /* Hidden by default */
+position: fixed; /* Stay in place */
+z-index: 1; /* Sit on top */
+padding-top: 100px; /* Location of the box */
+left: 0;
+top: 0;
+width: 100%; /* Full width */
+height: 100%; /* Full height */
+overflow: auto; /* Enable scroll if needed */
+background-color: rgb(0,0,0); /* Fallback color */
+background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+border-radius: 2px;
+}
+
+.qmodal-content {
+background-color: #fefefe;
+margin: auto;
+padding: 20px;
+border: 1px solid #888;
+width: 80%;
+}
+
+/* .bg{
+background-image: url("./images/back.jpg");
+filter: blur(8px);
+background-repeat: no-repeat;
+} */
+/* The Modal (background) */
+.modal {
+  display: none; /*Hidden by default*/
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  /* padding-top: 40px; Location of the box */
+  left: 20%;
+  top: 10%;
+  width: 70%; /* Full width */
+  height: 70%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  border-radius: 2px;
+
+  background-color: rgb(53, 5, 5); /* Fallback color */
+  background-color: rgba(31, 83, 179, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content
+.video
+.img
+ {
+  background-color: #f8b363;
+  margin: auto;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  /* padding: 20px; */
+  border: 1px solid #888;
+  width: 80%;
+  height: 98%;
+}
+.qclose {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.qclose:hover,
+.qclose:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.flip-card {
+  background-color: transparent;
+  width: 200px;
+  height: 250px;
+  perspective: 1000px;
+  display: none;
+border-radius: 2px;
+
+}
+
+.flip-card-inner {
+  position: relative;
+border-radius: 2px;
+
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+border-radius: 2px;
+
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: rgb(81, 128, 160);
+  color: black;
+}
+
+.flip-card-back {
+  background-color: #077cca;
+  color: white;
+  transform: rotateY(180deg);
+}
+</style>
+
+  <title>Hangman</title>
+</head>
+<body>
+  <!-- <div class="bg"></div> -->
+
+<div class="container">
+  <h1 class="text-center" style="font-family: cursive;color: red;">Hangman</h1>
+<button class="btn btn-info" id="qmyBtn" style="display: none;">Begin Quiz</button>
+
+  <!-- <span><img class = "float-left" src="./images/hang_logo.png" style="width: 400px; height: 200px;"></span> -->
+  <h2 id = "demo"></h2>
+  <div class="float-right" style="color:yellow;">Wrong Guesses: <span id='mistakes'>0</span> of <span id='maxWrong'></span></div>
+  <div class="float-left" style="color:yellow;">Score: <span id='uscore'>0</span></div>
+
+  <div class="text-center">
+    <img id='hangmanPic' src="./images/0.jpg" alt="">
+    <p style="color:red;">Guess the Programming Language:</p>
+    <p id="wordSpotlight" style="color:white;">The word to be guessed goes here</p>
+    <div id="keyboard"></div>
+    <button class="btn btn-info" onClick="reset()">Reset</button>
+
+          <!-- The Modal -->
+<div id="qmyModal" class="qmodal">
+
+    <!-- Modal content -->
+    <div class="qmodal-content">
+      <a href="/butiles"><span class="qclose">&times;</span></a>
+      <div id='qcontainer'>
+        <div id='title'>
+          <h1>P&BM Quiz</h1>
+        </div>
+          <br/>
+          <div id='quiz'></div>
+          <div class='button' id='next'><a href='#'>Next</a></div>
+          <div class='button' id='prev'><a href='#'>Prev</a></div>
+          <!--<div class='button' id='start'> <a href='#'>Start Over</a></div>-->
+          <!-- <button class='' id='next'>Next</a></button>
+          <button class='' id='prev'>Prev</a></button>
+          <button class='' id='start'> Start Over</a></button> -->
+          </div>
+          </div>
+          </div>
+    <div id="myModal" class="modal">
+
+
+  
+  <!-- Modal content -->
+  <div class="modal-content">
+    <!-- <p>Some text in the Modal..</p> -->
+    <span class="close">&times;</span>
+    <video id='myVideo'  >
+      <source src="" type="video/mp4">
+      <!-- <source src="movie.ogg" type="video/ogg"> -->
+      <!-- Your browser does not support the video tag. -->
+
+    </video> 
+    <img id="imgrt" src=""></img >
+    <div id="outer" style="width: 100%;">
+    <div class="flip-card" id="flip1">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <h1>Neerav Jain </h1>
+            <h5>People Operations & Performance</h5>
+            
+        </div>
+        <div class="flip-card-back">
+          <ul><li>Culture & Mobility</li>
+            <li>Capability </li>
+            <li>Organisation Design & Effectiveness</li>
+            <li>Pay & Performance</li>
+            <li>Communications</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="flip-card" id="flip2">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <h1>Shakila Praveen</h1>
+            
+            <h5>Vendor Management</h5>
+            
+        </div>
+        <div class="flip-card-back">
+          <ul><li>SOW governance</li>
+            <li>Vendor Compliance and PO Governance</li>
+            <li>Portfolio Rebalancing</li>
+            <li>Pay & Performance</li>
+            <li>Communications</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card" id="flip3">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <h1>Pawan Wig</h1>
+            <h5>Risk Assurance & Compliance</h5>
+            
+        </div>
+        <div class="flip-card-back">
+          <ul><li>Governance of India operational risks through technology India risk forum</li>
+            <li>Submission of risk profile to various Global Hub India forums and UK forums </li>
+            <li>Issuance of Compliance Certificate – All regulatory compliance for technology India are complied with</li>
+            <li>Review, revisit and republish Business continuity plan on annual basis</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card" id="flip4">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <h1>Seema Verma </h1>
+            <h5>Automation & Digitalisation</h5>
+            
+        </div>
+        <div class="flip-card-back">
+          <ul><li>Automation & Digitisation of Services provided by P&BM across technology</li>
+            <li>Automation of new hiring workflow for perms and contractual</li>
+            <li>Enablement  of Visualization of Workforce Management data across technology through Tableau.</li>
+            <li>P&BM Knowledge Centre as one stop shop to understand all services provided by us</li>
+            <li>Ongoing onboarding of new businesses on   the automation platform</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card" id="flip5">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <h1>Shivani Singal
+            
+             </h1>
+            <h5>India Technology Academy</h5>
+            
+        </div>
+        <div class="flip-card-back">
+          <ul><li>Capability Building –Technical, domain & behavioral</li>
+            <li>Certification Programs – e.g. ITIL CSM etc. </li>
+            <li>Role –based programs </li>
+            <li>Talent Management – Early Careers (Graduates)</li>
+            <li>Manager Capability Building</li>
+            <li>PDP Clinics</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card" id="flip6">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <h1>Nicky Appachu 
+              
+               </h1>
+            <h5>Business Enablement & Records Management</h5>
+            
+        </div>
+        <div class="flip-card-back">
+          <ul><li>Supplier Management </li>
+            <li>Administrative Services </li>
+            <li>Business Enablement – Projects</li>
+            <li>Business Records – Management</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card" id="flip7">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <h1>
+              Jigar Jobanputra
+               </h1>
+            <h5>Cost Management & Strategic Programs</h5>
+            
+        </div>
+        <div class="flip-card-back">
+          <ul><li>Response to Cost & Budget Challenges
+              </li>
+            <li>Ensure Cost Tracking, Optimisation & Transparency </li>
+            <li>Drive Productivity Budget Preparation, Investments/ Spend Governance</li>
+            <li>Transfer Pricing, SEZ and Tax related support</li>
+            <li>Services India initiatives </li>
+            <li>Efficient Allocations & Chargeback</li>
+            <li>Offshore Transition and Support of key UK Processes in Cost Management</li>
+            <li>Central projects Admin Team (CPAT)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+</div>
+  </div> 
+</div>
+<script>
+
+    // var qmodal = document.getElementById("qmyModal");
+    
+    // Get the button that opens the modal
+    // var btn = document.getElementById("myBtn");
+    
+    // Get the <span> element that closes the modal
+    // var span = document.getElementsByClassName("close")[0];
+    
+    // btn.onclick = function() {
+    //       qmodal.style.display = "block";
+    //     }
+        
+    //     // When the user clicks on <span> (x), close the modal
+    //     span.onclick = function() {
+    //       qmodal.style.display = "none";
+    //     }
+        
+    //     // When the user clicks anywhere outside of the modal, close it
+    //     window.onclick = function(event) {
+    //       if (event.target == modal) {
+    //         qmodal.style.display = "none";
+    //       }
+    //     }
+    </script>
+<script src='./js/hangman.js'></script>
+</body>
+</html>

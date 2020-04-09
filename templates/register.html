@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+ 
+body {
+  
+  background-image: url('background.jpg');
+
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+h3{
+    text-align: center;
+    
+    }
+    #register{
+        
+      border-radius: 0px;
+      height:50px;
+      text-align: center;
+    }
+    .Register
+    {
+      background-image : url("background.jpg");
+        background-color: #cccccc;
+        height: 500px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+      
+    }
+.p{ 
+  color:white;
+  font-size: 20px;
+}
+.e{
+  color: white;
+  font-size: 20px;
+}
+    .t{
+    height: 100px;
+    color: white;
+    font-size: 25px;
+  
+    }
+    .button1 {
+      background-color: rgb(58, 189, 178);
+      border-radius:40px;
+      border: none;
+      color: none;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      width: 10%;
+    }
+    
+    .button2 {
+    
+      background-color:rgb(240, 213, 163);
+      border-radius:40px;
+      border: none;
+      color: none;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      width: 10%;
+    
+    
+    }
+
+    .button3
+    {
+       
+        background-color:rgb(216, 192, 196);
+        border-radius:40px;
+        border: none;
+        color: none;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 20%;
+
+    }
+    .App-link {
+      color: #61dafb;
+    }
+    
+    .imgcontainer {
+      text-align: center;
+      margin: 24px 0 12px 0;
+    }
+    
+    img.avatar {
+      width: 40%;
+      border-radius: 50%;
+    }
+    @keyframes App-logo-spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    
+</style>
+</head>
+<body>
+
+        <div id="register">
+                <br />
+                <br />
+              <div className="Register"> 
+              
+              <div class="t"><h2> REGISTER </h2></div>
+              <form action="/register" method="post">
+
+                <div class='e'>
+                
+              &nbsp;&nbsp;Name  :&nbsp; 
+              <input type="text" placeholder="Enter you name" name="name" size ="30" required></input>
+              </div>
+              <br />
+                
+              <div class='e'>
+
+              &nbsp;&nbsp;Email ID :&nbsp; 
+              <input type="email" placeholder="Email ID (xyz@abcd.com)" name="email"size ="30" required></input>
+              </div>
+              <br/>
+               <div class='p'>
+                 Password :&nbsp;
+               <input type="password" placeholder="Password" name="psw" size ="30" required></input>
+               </div>
+               <br />
+               <br />
+               
+               <Link to="/Butiles"><button class="button1"> Sign Up</button></Link>
+               <br />
+              
+              </form>
+              <a href="/login"><button class="button1"> Go to Login Page </button></a>
+              </div>
+              </div>
+
+</body>
+</html>
